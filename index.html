@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-<title>Boulangerie ROMANE | Artisan Boulanger à Lyon</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- SEO -->
-<meta name="description" content="Boulangerie artisanale à Lyon. Pain chaud, viennoiseries maison, pâtisseries artisanales et avis clients réels.">
+<title>Boulangerie ROMANE — Artisan Boulanger à Lyon</title>
+
+<meta name="description" content="Boulangerie ROMANE à Lyon. Pain artisanal, viennoiseries pur beurre, pâtisseries maison et savoir-faire traditionnel français.">
+
+<!-- Protection simple -->
+<meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval' data: blob:;">
 
 <!-- Bootstrap -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -15,582 +18,769 @@
 <!-- Icons -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 
 :root{
-  --gold:#d9a35f;
-  --dark:#161616;
-  --light:#fff8f1;
+    --gold:#d9a35f;
+    --dark:#111111;
+    --cream:#fdf7f0;
+    --light:#ffffff;
 }
 
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
 html{
-  scroll-behavior:smooth;
+    scroll-behavior:smooth;
 }
 
 body{
-  font-family:'Poppins',sans-serif;
-  background:#fdf8f3;
-  color:#222;
-  overflow-x:hidden;
+    font-family:'Poppins',sans-serif;
+    background:var(--cream);
+    overflow-x:hidden;
+    color:#222;
 }
 
+/* ========================= */
+/* SCROLLBAR */
+/* ========================= */
+
+::-webkit-scrollbar{
+    width:10px;
+}
+
+::-webkit-scrollbar-thumb{
+    background:var(--gold);
+    border-radius:20px;
+}
+
+/* ========================= */
+/* WATERMARK */
+/* ========================= */
+
+.watermark{
+    position:fixed;
+    bottom:15px;
+    right:15px;
+    z-index:99999;
+    font-size:.8rem;
+    opacity:.3;
+    pointer-events:none;
+    font-weight:600;
+}
+
+/* ========================= */
+/* POPUP */
+/* ========================= */
+
+.welcome-popup{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.7);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:999999;
+    backdrop-filter:blur(8px);
+    animation:fadeIn .5s ease;
+}
+
+.popup-box{
+    width:90%;
+    max-width:650px;
+    background:white;
+    border-radius:30px;
+    overflow:hidden;
+    box-shadow:0 20px 60px rgba(0,0,0,.3);
+    animation:popup .7s ease;
+}
+
+.popup-image{
+    height:260px;
+    background:url('https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=1600&auto=format&fit=crop') center/cover;
+}
+
+.popup-content{
+    padding:40px;
+    text-align:center;
+}
+
+.popup-content h2{
+    font-weight:700;
+    margin-bottom:15px;
+}
+
+.popup-btn{
+    margin-top:20px;
+    border:none;
+    padding:14px 35px;
+    border-radius:40px;
+    background:linear-gradient(45deg,#d9a35f,#f5c07d);
+    font-weight:600;
+    transition:.4s;
+}
+
+.popup-btn:hover{
+    transform:translateY(-3px);
+}
+
+/* ========================= */
 /* NAVBAR */
+/* ========================= */
 
 .navbar{
-  backdrop-filter:blur(12px);
-  background:rgba(0,0,0,.75)!important;
-  padding:18px 0;
-  transition:.4s;
+    padding:20px 0;
+    background:rgba(0,0,0,.75)!important;
+    backdrop-filter:blur(10px);
+    transition:.4s;
 }
 
 .navbar-brand{
-  font-weight:700;
-  font-size:1.5rem;
+    font-size:1.6rem;
+    font-weight:700;
+    color:white!important;
 }
 
 .nav-link{
-  color:white!important;
-  margin-left:15px;
-  transition:.3s;
+    color:white!important;
+    margin-left:18px;
+    font-weight:500;
+    transition:.3s;
 }
 
 .nav-link:hover{
-  color:var(--gold)!important;
+    color:var(--gold)!important;
 }
 
+/* ========================= */
 /* HERO */
+/* ========================= */
 
 .hero{
-  min-height:100vh;
-  position:relative;
-  display:flex;
-  align-items:center;
-  overflow:hidden;
+    min-height:100vh;
+    position:relative;
+    display:flex;
+    align-items:center;
+    overflow:hidden;
 }
 
 .hero video{
-  position:absolute;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  top:0;
-  left:0;
+    position:absolute;
+    width:100%;
+    height:100%;
+    object-fit:cover;
 }
 
 .hero::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:rgba(0,0,0,.55);
-  z-index:1;
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to bottom, rgba(0,0,0,.75), rgba(0,0,0,.55));
 }
 
 .hero-content{
-  position:relative;
-  z-index:2;
-  color:white;
+    position:relative;
+    z-index:2;
+    color:white;
+}
+
+.hero-badge{
+    display:inline-block;
+    background:rgba(255,255,255,.15);
+    padding:12px 22px;
+    border-radius:40px;
+    backdrop-filter:blur(10px);
+    margin-bottom:25px;
+    border:1px solid rgba(255,255,255,.15);
 }
 
 .hero h1{
-  font-size:5rem;
-  font-weight:700;
-  animation:fadeUp 1s ease;
+    font-size:5rem;
+    font-weight:800;
+    line-height:1.1;
 }
 
 .hero p{
-  font-size:1.3rem;
-  margin-top:20px;
-  animation:fadeUp 1.4s ease;
+    font-size:1.2rem;
+    margin-top:25px;
+    max-width:700px;
+}
+
+.hero-buttons{
+    margin-top:40px;
 }
 
 .hero-btn{
-  margin-top:35px;
-  padding:16px 40px;
-  border:none;
-  border-radius:50px;
-  background:linear-gradient(45deg,#d9a35f,#f7c98b);
-  color:black;
-  font-weight:600;
-  transition:.4s;
-  box-shadow:0 10px 30px rgba(0,0,0,.3);
+    border:none;
+    padding:16px 34px;
+    border-radius:50px;
+    font-weight:600;
+    margin-right:15px;
+    transition:.4s;
+}
+
+.btn-gold{
+    background:linear-gradient(45deg,#d9a35f,#f7c98b);
+}
+
+.btn-dark{
+    background:white;
 }
 
 .hero-btn:hover{
-  transform:translateY(-5px) scale(1.03);
+    transform:translateY(-5px);
 }
 
-.rating-box{
-  margin-top:25px;
-  display:inline-block;
-  background:rgba(255,255,255,.15);
-  backdrop-filter:blur(10px);
-  padding:12px 22px;
-  border-radius:40px;
-  border:1px solid rgba(255,255,255,.2);
-}
-
-/* FLOATING */
-
-.floating-bread{
-  position:absolute;
-  width:120px;
-  opacity:.08;
-  animation:float 6s ease-in-out infinite;
-}
-
-.bread1{
-  top:10%;
-  left:5%;
-}
-
-.bread2{
-  bottom:10%;
-  right:5%;
-}
-
+/* ========================= */
 /* SECTION */
+/* ========================= */
 
 section{
-  padding:110px 0;
+    padding:110px 0;
 }
 
 .section-title{
-  text-align:center;
-  margin-bottom:70px;
+    text-align:center;
+    margin-bottom:70px;
 }
 
 .section-title h2{
-  font-size:3rem;
-  font-weight:700;
-  color:#222;
+    font-size:3rem;
+    font-weight:800;
 }
 
 .section-title p{
-  color:#777;
+    color:#777;
 }
 
-/* CARDS */
+/* ========================= */
+/* STORY */
+/* ========================= */
+
+.story-box{
+    background:white;
+    padding:50px;
+    border-radius:35px;
+    box-shadow:0 20px 50px rgba(0,0,0,.08);
+}
+
+.story-image{
+    overflow:hidden;
+    border-radius:30px;
+}
+
+.story-image img{
+    width:100%;
+    transition:1s;
+}
+
+.story-image:hover img{
+    transform:scale(1.05);
+}
+
+/* ========================= */
+/* PRODUCTS */
+/* ========================= */
 
 .product-card{
-  overflow:hidden;
-  border:none;
-  border-radius:28px;
-  background:white;
-  box-shadow:0 15px 40px rgba(0,0,0,.08);
-  transition:.5s;
+    border:none;
+    border-radius:30px;
+    overflow:hidden;
+    background:white;
+    box-shadow:0 15px 40px rgba(0,0,0,.08);
+    transition:.5s;
+    height:100%;
 }
 
 .product-card:hover{
-  transform:translateY(-10px);
+    transform:translateY(-10px);
 }
 
 .product-card img{
-  height:280px;
-  object-fit:cover;
-  transition:.6s;
-}
-
-.product-card:hover img{
-  transform:scale(1.08);
+    height:280px;
+    object-fit:cover;
 }
 
 .product-content{
-  padding:30px;
+    padding:30px;
 }
 
-/* ABOUT */
-
-.about-img{
-  border-radius:30px;
-  overflow:hidden;
-  box-shadow:0 15px 40px rgba(0,0,0,.1);
-}
-
-.about-img img{
-  width:100%;
-  transition:1s;
-}
-
-.about-img:hover img{
-  transform:scale(1.05);
-}
-
-/* STATS */
-
-.stats{
-  background:#161616;
-  color:white;
-  border-radius:30px;
-  padding:50px;
-  margin-top:70px;
-}
-
-.stats h3{
-  font-size:3rem;
-  color:var(--gold);
-}
-
-/* AVIS */
+/* ========================= */
+/* REVIEWS */
+/* ========================= */
 
 .review-wrapper{
-  overflow:hidden;
-  position:relative;
+    overflow:hidden;
 }
 
 .review-track{
-  display:flex;
-  gap:30px;
-  width:max-content;
-  animation:scroll 35s linear infinite;
+    display:flex;
+    gap:30px;
+    width:max-content;
+    animation:scroll 35s linear infinite;
 }
 
 .review-card{
-  width:360px;
-  background:white;
-  border-radius:28px;
-  padding:30px;
-  box-shadow:0 15px 35px rgba(0,0,0,.08);
+    width:350px;
+    background:white;
+    border-radius:30px;
+    padding:30px;
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
 }
 
 .review-card img{
-  width:55px;
-  height:55px;
-  border-radius:50%;
-  object-fit:cover;
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    object-fit:cover;
 }
 
 .stars{
-  color:#ffc107;
-  font-size:1.1rem;
+    color:#ffc107;
 }
 
+/* ========================= */
+/* MAP */
+/* ========================= */
+
+.map-box{
+    overflow:hidden;
+    border-radius:35px;
+    box-shadow:0 20px 50px rgba(0,0,0,.1);
+}
+
+.map-box iframe{
+    width:100%;
+    height:500px;
+    border:0;
+}
+
+/* ========================= */
 /* CONTACT */
+/* ========================= */
 
 .contact-box{
-  background:white;
-  border-radius:30px;
-  padding:50px;
-  box-shadow:0 15px 40px rgba(0,0,0,.08);
+    background:white;
+    padding:50px;
+    border-radius:35px;
+    box-shadow:0 20px 50px rgba(0,0,0,.08);
 }
 
 .form-control{
-  border:none;
-  background:#f5f5f5;
-  padding:15px;
-  border-radius:15px;
+    border:none;
+    background:#f4f4f4;
+    border-radius:15px;
+    padding:16px;
 }
 
 .form-control:focus{
-  box-shadow:none;
-  background:#efefef;
+    box-shadow:none;
 }
 
-.btn-send{
-  background:linear-gradient(45deg,#d9a35f,#f7c98b);
-  border:none;
-  padding:14px 35px;
-  border-radius:40px;
-  font-weight:600;
+.send-btn{
+    border:none;
+    padding:15px 35px;
+    border-radius:40px;
+    background:linear-gradient(45deg,#d9a35f,#f5c07d);
+    font-weight:600;
 }
 
+/* ========================= */
 /* FOOTER */
+/* ========================= */
 
 footer{
-  background:#111;
-  color:white;
-  padding:70px 0 40px;
+    background:#111;
+    color:white;
+    padding:80px 0 40px;
 }
 
 .footer-social i{
-  font-size:1.3rem;
-  margin:0 10px;
-  transition:.3s;
-  cursor:pointer;
+    font-size:1.4rem;
+    margin:0 10px;
+    transition:.4s;
 }
 
 .footer-social i:hover{
-  color:var(--gold);
-  transform:translateY(-3px);
+    color:var(--gold);
+    transform:translateY(-4px);
 }
 
-/* ANIMATIONS */
+/* ========================= */
+/* ANIMATION */
+/* ========================= */
 
 @keyframes scroll{
-  0%{
-    transform:translateX(0);
-  }
-  100%{
-    transform:translateX(-50%);
-  }
+    0%{
+        transform:translateX(0);
+    }
+    100%{
+        transform:translateX(-50%);
+    }
 }
 
-@keyframes float{
-  0%{transform:translateY(0px);}
-  50%{transform:translateY(-20px);}
-  100%{transform:translateY(0px);}
+@keyframes popup{
+    from{
+        opacity:0;
+        transform:translateY(60px) scale(.9);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
 }
 
-@keyframes fadeUp{
-  from{
-    opacity:0;
-    transform:translateY(50px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
+@keyframes fadeIn{
+    from{
+        opacity:0;
+    }
+    to{
+        opacity:1;
+    }
 }
 
 @media(max-width:768px){
 
-  .hero h1{
+.hero h1{
     font-size:3rem;
-  }
+}
 
-  .review-card{
+.section-title h2{
+    font-size:2rem;
+}
+
+.popup-content{
+    padding:25px;
+}
+
+.review-card{
     width:300px;
-  }
+}
 
 }
 
 </style>
+
 </head>
 
-<body>
+<body oncontextmenu="return false">
+
+<!-- WATERMARK -->
+
+<div class="watermark">
+    T&A Digital Management
+</div>
+
+<!-- POPUP -->
+
+<div class="welcome-popup" id="popup">
+
+    <div class="popup-box">
+
+        <div class="popup-image"></div>
+
+        <div class="popup-content">
+
+            <h2>Bienvenue sur la maquette premium de ROMANE</h2>
+
+            <p class="text-muted">
+                Cette présentation est entièrement personnalisable :
+                couleurs, photos, sections, animations, menu, avis clients,
+                identité visuelle et contenu.
+            </p>
+
+            <p class="fw-semibold mt-3">
+                Contactez-nous via le mail reçu afin d’échanger ensemble
+                sur votre futur site internet professionnel.
+            </p>
+
+            <button class="popup-btn" onclick="closePopup()">
+                Découvrir le site
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
 
 <!-- NAVBAR -->
 
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-  <div class="container">
 
-    <a class="navbar-brand" href="#">
-      <i class="bi bi-shop"></i> ROMANE
-    </a>
+<div class="container">
 
-    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+<a class="navbar-brand" href="#">
+<i class="bi bi-shop"></i> ROMANE
+</a>
 
-    <div class="collapse navbar-collapse" id="menu">
+<button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
+<span class="navbar-toggler-icon"></span>
+</button>
 
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="#about">À propos</a></li>
-        <li class="nav-item"><a class="nav-link" href="#products">Produits</a></li>
-        <li class="nav-item"><a class="nav-link" href="#reviews">Avis</a></li>
-        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-      </ul>
+<div class="collapse navbar-collapse" id="menu">
 
-    </div>
-  </div>
+<ul class="navbar-nav ms-auto">
+
+<li class="nav-item">
+<a class="nav-link" href="#story">Histoire</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="#products">Spécialités</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="#reviews">Avis</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="#map">Localisation</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="#contact">Contact</a>
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
 </nav>
 
 <!-- HERO -->
 
 <section class="hero">
 
-  <!-- VIDEO BACKGROUND -->
-  <video autoplay muted loop playsinline>
-    <source src="https://cdn.coverr.co/videos/coverr-baker-kneading-dough-1562247226208?download=1080p" type="video/mp4">
-  </video>
+<video autoplay muted loop playsinline>
+<source src="https://cdn.coverr.co/videos/coverr-baker-kneading-dough-1562247226208?download=1080p" type="video/mp4">
+</video>
 
-  <img class="floating-bread bread1"
-  src="https://cdn-icons-png.flaticon.com/512/3081/3081986.png">
+<div class="container hero-content">
 
-  <img class="floating-bread bread2"
-  src="https://cdn-icons-png.flaticon.com/512/3081/3081986.png">
+<div class="hero-badge">
+⭐ Boulangerie artisanale premium à Lyon
+</div>
 
-  <div class="container hero-content text-center">
+<h1>
+Le vrai goût<br>
+du pain artisanal français
+</h1>
 
-    <h1>Boulangerie ROMANE</h1>
+<p>
+Depuis plusieurs années, la Boulangerie ROMANE fait vivre
+la tradition boulangère française à travers des pains,
+viennoiseries et pâtisseries réalisés chaque jour
+avec passion et authenticité.
+</p>
 
-    <p>
-      Pain artisanal • Viennoiseries pur beurre • Pâtisseries maison
-    </p>
+<div class="hero-buttons">
 
-    <div class="rating-box">
-      ⭐ 4.8 / 5 — +270 avis clients
-    </div>
+<button class="hero-btn btn-gold">
+<i class="bi bi-geo-alt-fill"></i>
+ Voir la boutique
+</button>
 
-    <div>
-      <a href="#contact" class="btn hero-btn">
-        Commander maintenant
-      </a>
-    </div>
+<button class="hero-btn btn-dark">
+⭐ 4.8/5 • +270 avis
+</button>
 
-  </div>
-</section>
+</div>
 
-<!-- ABOUT -->
-
-<section id="about">
-
-  <div class="container">
-
-    <div class="section-title">
-      <h2>Le goût du vrai artisanat</h2>
-      <p>Boulangerie artisanale haut de gamme à Lyon</p>
-    </div>
-
-    <div class="row align-items-center g-5">
-
-      <div class="col-lg-6">
-
-        <div class="about-img">
-          <img src="https://images.unsplash.com/photo-1517433670267-08bbd4be890f?q=80&w=1600&auto=format&fit=crop">
-        </div>
-
-      </div>
-
-      <div class="col-lg-6">
-
-        <h3 class="fw-bold mb-4">
-          Une boulangerie moderne et authentique
-        </h3>
-
-        <p class="text-muted">
-          Chez ROMANE, chaque produit est préparé chaque matin avec des ingrédients frais,
-          des farines sélectionnées et un savoir-faire artisanal.
-        </p>
-
-        <p class="text-muted">
-          Nous mélangeons tradition française et expérience premium pour offrir un lieu chaleureux,
-          élégant et gourmand.
-        </p>
-
-        <div class="stats">
-
-          <div class="row text-center">
-
-            <div class="col-4">
-              <h3>12+</h3>
-              <p>Années</p>
-            </div>
-
-            <div class="col-4">
-              <h3>270+</h3>
-              <p>Avis</p>
-            </div>
-
-            <div class="col-4">
-              <h3>100%</h3>
-              <p>Artisanal</p>
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
+</div>
 
 </section>
 
-<!-- PRODUITS -->
+<!-- STORY -->
+
+<section id="story">
+
+<div class="container">
+
+<div class="section-title">
+
+<h2>L’histoire de ROMANE</h2>
+
+<p>Tradition • Passion • Artisanat</p>
+
+</div>
+
+<div class="row align-items-center g-5">
+
+<div class="col-lg-6">
+
+<div class="story-image">
+
+<img src="https://images.unsplash.com/photo-1517433670267-08bbd4be890f?q=80&w=1600&auto=format&fit=crop">
+
+</div>
+
+</div>
+
+<div class="col-lg-6">
+
+<div class="story-box">
+
+<h3 class="fw-bold mb-4">
+Une boulangerie pensée comme un lieu de vie
+</h3>
+
+<p class="text-muted">
+ROMANE est née d’une passion pour le vrai pain artisanal
+et le savoir-faire français traditionnel.
+</p>
+
+<p class="text-muted">
+Chaque matin, nos produits sont préparés sur place
+avec des ingrédients sélectionnés, des farines de qualité
+et une attention particulière portée aux saveurs.
+</p>
+
+<p class="text-muted">
+L’objectif est simple :
+offrir une expérience chaleureuse, moderne et authentique,
+où chaque client retrouve le goût des produits faits maison.
+</p>
+
+<div class="mt-4">
+
+<div class="d-flex align-items-center mb-3">
+<i class="bi bi-check-circle-fill text-warning me-3"></i>
+Produits frais chaque matin
+</div>
+
+<div class="d-flex align-items-center mb-3">
+<i class="bi bi-check-circle-fill text-warning me-3"></i>
+Fabrication artisanale française
+</div>
+
+<div class="d-flex align-items-center">
+<i class="bi bi-check-circle-fill text-warning me-3"></i>
+Accueil chaleureux & ambiance premium
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- PRODUCTS -->
 
 <section id="products" style="background:#fffaf5;">
 
 <div class="container">
 
 <div class="section-title">
-  <h2>Nos spécialités</h2>
-  <p>Produits faits maison chaque jour</p>
+
+<h2>Nos spécialités</h2>
+
+<p>Préparées chaque jour sur place</p>
+
 </div>
 
 <div class="row g-4">
 
-  <div class="col-lg-4">
+<div class="col-lg-4">
 
-    <div class="product-card">
+<div class="product-card">
 
-      <img src="https://images.unsplash.com/photo-1608198093002-ad4e005484ec?q=80&w=1600&auto=format&fit=crop">
+<img src="https://images.unsplash.com/photo-1608198093002-ad4e005484ec?q=80&w=1600&auto=format&fit=crop">
 
-      <div class="product-content">
+<div class="product-content">
 
-        <h4>Pains artisanaux</h4>
+<h4>Pains artisanaux</h4>
 
-        <p class="text-muted">
-          Tradition française, campagne, céréales et pains spéciaux.
-        </p>
-
-      </div>
-
-    </div>
-
-  </div>
-
-  <div class="col-lg-4">
-
-    <div class="product-card">
-
-      <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=1600&auto=format&fit=crop">
-
-      <div class="product-content">
-
-        <h4>Viennoiseries</h4>
-
-        <p class="text-muted">
-          Croissants pur beurre, pains chocolat et brioches maison.
-        </p>
-
-      </div>
-
-    </div>
-
-  </div>
-
-  <div class="col-lg-4">
-
-    <div class="product-card">
-
-      <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=1600&auto=format&fit=crop">
-
-      <div class="product-content">
-
-        <h4>Pâtisserie premium</h4>
-
-        <p class="text-muted">
-          Éclairs, tartes, entremets et créations signature.
-        </p>
-
-      </div>
-
-    </div>
-
-  </div>
+<p class="text-muted">
+Baguettes tradition, pains spéciaux,
+campagne et céréales.
+</p>
 
 </div>
 
 </div>
+
+</div>
+
+<div class="col-lg-4">
+
+<div class="product-card">
+
+<img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=1600&auto=format&fit=crop">
+
+<div class="product-content">
+
+<h4>Viennoiseries pur beurre</h4>
+
+<p class="text-muted">
+Croissants, pains chocolat,
+brioches et spécialités maison.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-lg-4">
+
+<div class="product-card">
+
+<img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=1600&auto=format&fit=crop">
+
+<div class="product-content">
+
+<h4>Pâtisserie premium</h4>
+
+<p class="text-muted">
+Tartes, éclairs, créations gourmandes
+et desserts artisanaux.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
 </section>
 
-<!-- AVIS -->
+<!-- REVIEWS -->
 
 <section id="reviews">
 
 <div class="container">
 
 <div class="section-title">
-  <h2>Ils adorent ROMANE</h2>
-  <p>Défilement automatique des avis clients</p>
+
+<h2>Les clients adorent ROMANE</h2>
+
+<p>Avis qui défilent automatiquement</p>
+
 </div>
 
 <div class="review-wrapper">
 
 <div class="review-track">
-
-<!-- REVIEW -->
 
 <div class="review-card">
 
@@ -608,12 +798,10 @@ footer{
 <div class="stars mb-3">★★★★★</div>
 
 <p>
-“Le meilleur croissant de Lyon. Service rapide et ambiance incroyable.”
+“Le meilleur croissant de Lyon. Boutique magnifique.”
 </p>
 
 </div>
-
-<!-- REVIEW -->
 
 <div class="review-card">
 
@@ -631,12 +819,10 @@ footer{
 <div class="stars mb-3">★★★★★</div>
 
 <p>
-“Le pain est exceptionnel. On sent la vraie boulangerie artisanale.”
+“Une vraie boulangerie artisanale premium.”
 </p>
 
 </div>
-
-<!-- REVIEW -->
 
 <div class="review-card">
 
@@ -654,12 +840,10 @@ footer{
 <div class="stars mb-3">★★★★★</div>
 
 <p>
-“Pâtisseries magnifiques et accueil ultra chaleureux.”
+“Produits frais et accueil ultra chaleureux.”
 </p>
 
 </div>
-
-<!-- DUPLICATION -->
 
 <div class="review-card">
 
@@ -677,33 +861,41 @@ footer{
 <div class="stars mb-3">★★★★★</div>
 
 <p>
-“Très haut niveau. Boutique superbe et produits premium.”
-</p>
-
-</div>
-
-<div class="review-card">
-
-<div class="d-flex align-items-center mb-3">
-
-<img src="https://randomuser.me/api/portraits/women/63.jpg">
-
-<div class="ms-3">
-<h6 class="mb-0">Laura Bernard</h6>
-<small class="text-muted">Avis Google</small>
-</div>
-
-</div>
-
-<div class="stars mb-3">★★★★★</div>
-
-<p>
-“Enfin une vraie boulangerie artisanale moderne à Lyon.”
+“Design superbe et pâtisseries incroyables.”
 </p>
 
 </div>
 
 </div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- MAP -->
+
+<section id="map" style="background:#fffaf5;">
+
+<div class="container">
+
+<div class="section-title">
+
+<h2>Où nous trouver</h2>
+
+<p>144 Boulevard de la Croix-Rousse — Lyon</p>
+
+</div>
+
+<div class="map-box">
+
+<iframe
+src="https://www.google.com/maps?q=144+Bd+de+la+Croix-Rousse+Lyon&output=embed"
+allowfullscreen=""
+loading="lazy">
+</iframe>
+
 </div>
 
 </div>
@@ -712,13 +904,16 @@ footer{
 
 <!-- CONTACT -->
 
-<section id="contact" style="background:#fffaf5;">
+<section id="contact">
 
 <div class="container">
 
 <div class="section-title">
-  <h2>Contact</h2>
-  <p>Commande • Informations • Événements</p>
+
+<h2>Contact & renseignements</h2>
+
+<p>Projet entièrement personnalisable</p>
+
 </div>
 
 <div class="row justify-content-center">
@@ -727,26 +922,59 @@ footer{
 
 <div class="contact-box">
 
-<div class="row g-4 mb-5">
+<div class="row mb-5">
 
-<div class="col-md-6">
-<h5><i class="bi bi-geo-alt-fill text-danger"></i> Adresse</h5>
-<p>144 Bd de la Croix-Rousse, Lyon</p>
+<div class="col-md-6 mb-4">
+
+<h5>
+<i class="bi bi-geo-alt-fill text-danger"></i>
+ Adresse
+</h5>
+
+<p class="text-muted">
+144 Bd de la Croix-Rousse<br>
+69001 Lyon
+</p>
+
+</div>
+
+<div class="col-md-6 mb-4">
+
+<h5>
+<i class="bi bi-telephone-fill text-success"></i>
+ Téléphone
+</h5>
+
+<p class="text-muted">
+04 78 98 86 29
+</p>
+
 </div>
 
 <div class="col-md-6">
-<h5><i class="bi bi-telephone-fill text-success"></i> Téléphone</h5>
-<p>04 78 98 86 29</p>
+
+<h5>
+<i class="bi bi-envelope-fill text-primary"></i>
+ Email
+</h5>
+
+<p class="text-muted">
+contact@romane-boulangerie.fr
+</p>
+
 </div>
 
 <div class="col-md-6">
-<h5><i class="bi bi-envelope-fill text-primary"></i> Email</h5>
-<p>contact@romane-boulangerie.fr</p>
-</div>
 
-<div class="col-md-6">
-<h5><i class="bi bi-clock-fill text-warning"></i> Horaires</h5>
-<p>6h30 — 20h00</p>
+<h5>
+<i class="bi bi-clock-fill text-warning"></i>
+ Horaires
+</h5>
+
+<p class="text-muted">
+6h30 — 20h00
+</p>
+
 </div>
 
 </div>
@@ -761,12 +989,12 @@ footer{
 <input type="email" class="form-control" placeholder="Votre email">
 </div>
 
-<div class="mb-3">
+<div class="mb-4">
 <textarea rows="5" class="form-control" placeholder="Votre message"></textarea>
 </div>
 
-<button class="btn btn-send">
-Envoyer le message
+<button class="send-btn">
+Envoyer la demande
 </button>
 
 </form>
@@ -787,10 +1015,12 @@ Envoyer le message
 
 <div class="container text-center">
 
-<h3 class="mb-4">Boulangerie ROMANE</h3>
+<h3 class="fw-bold mb-3">
+Boulangerie ROMANE
+</h3>
 
-<p>
-Boulangerie artisanale premium à Lyon
+<p class="text-light">
+Artisan boulanger à Lyon
 </p>
 
 <div class="footer-social my-4">
@@ -804,29 +1034,56 @@ Boulangerie artisanale premium à Lyon
 <hr style="border-color:rgba(255,255,255,.1);">
 
 <p class="mb-0">
-© 2026 ROMANE — Tous droits réservés
+© 2026 ROMANE — Site vitrine premium
+</p>
+
+<p class="mt-2" style="opacity:.6;">
+Conception : T&A Digital Management
 </p>
 
 </div>
 
 </footer>
 
+<!-- Bootstrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
 
-/* NAVBAR EFFECT */
+/* POPUP */
+
+function closePopup(){
+    document.getElementById("popup").style.display="none";
+}
+
+/* NAVBAR */
 
 window.addEventListener('scroll',()=>{
 
 const navbar=document.querySelector('.navbar');
 
-if(window.scrollY>50){
-  navbar.style.background="rgba(0,0,0,.92)";
+if(window.scrollY > 50){
+    navbar.style.background="rgba(0,0,0,.92)";
 }else{
-  navbar.style.background="rgba(0,0,0,.75)";
+    navbar.style.background="rgba(0,0,0,.75)";
 }
 
+});
+
+/* ANTI COPY */
+
+document.addEventListener('keydown', function(e) {
+
+if (e.ctrlKey && ['u','c','x','s'].includes(e.key.toLowerCase())) {
+    e.preventDefault();
+}
+
+});
+
+/* DISABLE IMAGE DRAG */
+
+document.querySelectorAll('img').forEach(img=>{
+img.setAttribute('draggable','false');
 });
 
 </script>
