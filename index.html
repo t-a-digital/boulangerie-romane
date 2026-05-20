@@ -452,6 +452,155 @@ footer{background:#090909;border-top:3px solid var(--R);padding:48px 0 20px}
   .sc{padding:24px 18px}
   .rb-n{font-size:1.4rem}
 }
+/* ════════════════════════════════════
+   MESSENGER DIAGNOSTIC PREVIEW
+════════════════════════════════════ */
+.msng-preview{
+  background:#111;border:1px solid rgba(192,57,43,.2);border-radius:16px;
+  width:100%;max-width:420px;
+  overflow:hidden;box-shadow:0 12px 48px rgba(0,0,0,.55);
+}
+.mp-header{
+  background:linear-gradient(90deg,var(--R3),var(--R));
+  padding:14px 18px;display:flex;align-items:center;gap:12px;
+}
+.mp-avatar{width:38px;height:38px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.mp-name{font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:700;color:#fff;letter-spacing:.5px}
+.mp-status{font-size:.7rem;color:rgba(255,255,255,.75);display:flex;align-items:center;gap:5px;margin-top:2px}
+.mp-dot{width:6px;height:6px;background:#2ecc71;border-radius:50%;display:inline-block}
+.mp-body{padding:16px 16px 8px}
+.mb{display:flex;align-items:flex-end;gap:8px;margin-bottom:10px}
+.mb-usr{flex-direction:row-reverse}
+.mb-av{width:28px;height:28px;background:var(--R);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0}
+.mb-wrap{display:flex;flex-direction:column;max-width:75%}
+.mb-usr .mb-wrap{align-items:flex-end}
+.mb-txt{padding:9px 13px;border-radius:18px;font-size:.82rem;line-height:1.5;color:#ddd}
+.mb-bot .mb-txt{background:#2a2a2a;border-bottom-left-radius:4px}
+.mb-usr .mb-txt{background:var(--R);color:#fff;border-bottom-right-radius:4px}
+.mb-time{font-size:.6rem;color:#555;margin-top:3px}
+.mp-chips{display:flex;flex-wrap:wrap;gap:5px;margin:8px 0 12px}
+.mp-chip{background:rgba(192,57,43,.12);border:1px solid rgba(192,57,43,.3);color:rgba(255,255,255,.7);font-size:.7rem;font-weight:600;padding:4px 11px;border-radius:20px}
+.mp-open-btn{
+  display:block;width:100%;
+  background:var(--R);color:#fff;border:none;cursor:pointer;
+  padding:14px;font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;
+  transition:background .2s;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.mp-open-btn:hover{background:var(--R2)}
+
+/* ════════════════════════════════════
+   CHAT MODAL MESSENGER
+════════════════════════════════════ */
+.diag-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:800;
+  opacity:0;pointer-events:none;transition:opacity .28s;
+  backdrop-filter:blur(3px);
+}
+.diag-overlay.open{opacity:1;pointer-events:all}
+.diag-modal{
+  position:fixed;bottom:24px;right:24px;z-index:801;
+  width:min(420px, calc(100vw - 32px));
+  height:min(600px, calc(100svh - 120px));
+  background:#111;border-radius:16px;overflow:hidden;
+  box-shadow:0 24px 80px rgba(0,0,0,.7),0 0 0 1px rgba(192,57,43,.25);
+  display:flex;flex-direction:column;
+  transform:translateY(20px) scale(.95);opacity:0;pointer-events:none;
+  transition:transform .3s var(--ease),opacity .3s;
+}
+.diag-modal.open{transform:translateY(0) scale(1);opacity:1;pointer-events:all}
+.dm-hd{
+  background:linear-gradient(90deg,var(--R3),var(--R));
+  padding:14px 16px;display:flex;align-items:center;gap:11px;flex-shrink:0;
+}
+.dm-av{width:36px;height:36px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.dm-name{font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:700;color:#fff;letter-spacing:.5px}
+.dm-status{font-size:.68rem;color:rgba(255,255,255,.75);display:flex;align-items:center;gap:5px;margin-top:2px}
+.dm-dot{width:6px;height:6px;background:#2ecc71;border-radius:50%;animation:blink 2s ease infinite}
+.dm-close{
+  margin-left:auto;background:rgba(255,255,255,.15);border:none;cursor:pointer;
+  color:#fff;width:28px;height:28px;border-radius:50%;font-size:.8rem;
+  display:flex;align-items:center;justify-content:center;transition:background .18s;flex-shrink:0;
+}
+.dm-close:hover{background:rgba(255,255,255,.3)}
+.dm-msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:8px;scroll-behavior:smooth}
+.dm-msgs::-webkit-scrollbar{width:3px}
+.dm-msgs::-webkit-scrollbar-track{background:#111}
+.dm-msgs::-webkit-scrollbar-thumb{background:var(--R);border-radius:2px}
+.dms{display:flex;align-items:flex-end;gap:7px;animation:msIn .25s var(--ease)}
+@keyframes msIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.dms-usr{flex-direction:row-reverse}
+.dms-av{width:26px;height:26px;background:var(--R);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0}
+.dms-wrap{display:flex;flex-direction:column;max-width:80%}
+.dms-usr .dms-wrap{align-items:flex-end}
+.dms-b{padding:9px 13px;border-radius:18px;font-size:.84rem;line-height:1.55;color:#ddd}
+.dms-bot .dms-b{background:#252525;border-bottom-left-radius:4px}
+.dms-usr .dms-b{background:var(--R);color:#fff;border-bottom-right-radius:4px}
+.dms-b a{color:#ffb3ac;font-weight:700}
+.dms-t{font-size:.6rem;color:#555;margin-top:3px}
+.dms-usr .dms-t{text-align:right}
+.dm-typing-row{display:flex;align-items:flex-end;gap:7px;margin-top:4px}
+.dm-typing-av{width:26px;height:26px;background:var(--R);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0}
+.dm-typing-b{background:#252525;border-radius:18px;border-bottom-left-radius:4px;padding:11px 16px;display:flex;gap:5px;align-items:center}
+.dm-typing-b span{width:6px;height:6px;background:#666;border-radius:50%;animation:td .9s ease infinite}
+.dm-typing-b span:nth-child(2){animation-delay:.2s}
+.dm-typing-b span:nth-child(3){animation-delay:.4s}
+@keyframes td{0%,100%{transform:translateY(0);background:#666}50%{transform:translateY(-4px);background:#aaa}}
+.dm-chips{padding:8px 12px;display:flex;flex-wrap:wrap;gap:6px;border-top:1px solid rgba(255,255,255,.05);flex-shrink:0;max-height:96px;overflow-y:auto}
+.dmc{
+  background:rgba(192,57,43,.1);border:1px solid rgba(192,57,43,.28);
+  color:rgba(255,255,255,.78);font-size:.73rem;font-weight:600;
+  padding:5px 12px;border-radius:20px;cursor:pointer;white-space:nowrap;
+  transition:all .18s;
+}
+.dmc:hover{background:var(--R);border-color:var(--R);color:#fff}
+.dm-input-row{display:flex;gap:0;border-top:1px solid rgba(255,255,255,.06);flex-shrink:0;background:#1a1a1a}
+.dm-input{flex:1;background:transparent;border:none;outline:none;padding:13px 15px;font-size:.86rem;color:#ddd;font-family:'Nunito Sans',sans-serif}
+.dm-input::placeholder{color:#444}
+.dm-send{width:46px;background:var(--R);border:none;cursor:pointer;color:#fff;display:flex;align-items:center;justify-content:center;transition:background .18s;flex-shrink:0}
+.dm-send:hover{background:var(--R2)}
+
+/* ════════════════════════════════════
+   BULLE FLOTTANTE MESSENGER
+════════════════════════════════════ */
+.msng-bubble{
+  position:fixed;bottom:88px;right:22px;z-index:700;
+  display:flex;align-items:center;gap:10px;
+  background:#1e1e1e;
+  border:1px solid rgba(192,57,43,.3);
+  border-radius:30px;
+  padding:10px 16px 10px 10px;
+  cursor:pointer;
+  box-shadow:0 6px 28px rgba(0,0,0,.45),0 0 0 1px rgba(192,57,43,.15);
+  transition:transform .22s,box-shadow .22s;
+  animation:bubbleIn .5s .8s var(--ease) both;
+  max-width:260px;
+}
+@keyframes bubbleIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.msng-bubble:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(0,0,0,.55)}
+.msng-bubble.hidden{display:none}
+.msng-bubble-ico{width:36px;height:36px;background:var(--R);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.msng-bubble-txt{font-size:.8rem;font-weight:600;color:#ddd;line-height:1.35}
+.msng-bubble-close{
+  position:absolute;top:-6px;left:-6px;
+  width:20px;height:20px;background:var(--dark4);border:1px solid rgba(255,255,255,.15);
+  border-radius:50%;color:#aaa;font-size:.65rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:background .18s;
+}
+.msng-bubble-close:hover{background:var(--R);color:#fff;border-color:var(--R)}
+.msng-notif{
+  position:absolute;top:-6px;right:-6px;
+  width:18px;height:18px;background:var(--R);border-radius:50%;
+  font-size:.65rem;font-weight:700;color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  animation:blink 2s ease infinite;
+}
+@media(max-width:480px){
+  .diag-modal{bottom:0;right:0;width:100%;height:min(580px,calc(100svh - var(--nh)));border-radius:16px 16px 0 0}
+  .msng-bubble{bottom:80px;right:16px;max-width:200px}
+  .msng-bubble-txt{font-size:.72rem}
+}
 </style>
 </head>
 <body>
@@ -608,11 +757,11 @@ footer{background:#090909;border-top:3px solid var(--R);padding:48px 0 20px}
 
 <!-- ══ SPLIT 1 ══ -->
 <section class="split">
-  <div class="simg rl"><img src="https://images.unsplash.com/photo-1590001155093-a3c66ab0c3ff?w=900&q=85" alt="Mécanicien" loading="lazy"></div>
+  <div class="simg rl"><img src="https://img.freepik.com/photos-premium/papier-qui-mot-auto-dessus_1103290-34824.jpg?semt=ais_hybrid&w=740&q=80" alt="Devis automobile" loading="lazy"></div>
   <div class="sbody rr">
     <div class="sl">Notre engagement</div>
-    <h2 class="st lt">Prix honnêtes,<br><span>travail soigné</span></h2>
-    <p>Avant chaque intervention, vous recevez un devis clair. Vous décidez — nous travaillons. Aucune surprise à la facturation.</p>
+    <h2 class="st lt">Prix honnêtes,<br><span>devis transparent</span></h2>
+    <p>Avant chaque intervention, vous recevez un devis clair et détaillé. Vous décidez, nous travaillons. Aucune surprise à la facturation.</p>
     <div class="fl">
       <div class="fi"><span>✔ Devis gratuit avant toute intervention</span></div>
       <div class="fi"><span>✔ Pièces d'origine ou équivalentes certifiées</span></div>
@@ -656,11 +805,11 @@ footer{background:#090909;border-top:3px solid var(--R);padding:48px 0 20px}
   <div class="cnt">
     <div class="rv"><div class="sl">Atelier &amp; véhicules</div><h2 class="st">Galerie <span>photos</span></h2></div>
     <div class="mosaic rv">
-      <div class="pm"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxkYlBnjvjXbOMq4alH57W1grtRX7Fw_XGfQ&s" alt="Garage V&R Roanne" loading="lazy"><div class="pm-cap"><span>Atelier Garage V&amp;R</span></div></div>
+      <div class="pm"><img src="https://images.unsplash.com/photo-1615906655593-ad0386982a0f?w=800&q=85" alt="Atelier Garage V&R" loading="lazy"><div class="pm-cap"><span>Atelier Garage V&amp;R</span></div></div>
       <div class="pm"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_tAJ7z03LwjnfKwMVAVJhwP6shdcdDqUcMQ&s" alt="Réparation" loading="lazy"><div class="pm-cap"><span>Réparation véhicule</span></div></div>
       <div class="pm"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAMGSvCrkM10UnIa8M9GZ_Os50iW-GKON3gw&s" alt="Mécanique moteur" loading="lazy"><div class="pm-cap"><span>Mécanique moteur</span></div></div>
       <div class="pm"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlEOQL1a8Uz1fhV6Jon7YktF6iGH7aezMFew&s" alt="Entretien" loading="lazy"><div class="pm-cap"><span>Entretien &amp; révision</span></div></div>
-      <div class="pm"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Diagnostic" loading="lazy"><div class="pm-cap"><span>Diagnostic pro</span></div></div>
+      <div class="pm"><img src="https://tse2.mm.bing.net/th/id/OIP.pu80meQtQEQmThYSA5cyrAHaE8?pid=Api&P=0&h=180" alt="Pneumatiques" loading="lazy"><div class="pm-cap"><span>Pneumatiques</span></div></div>
     </div>
     <p class="gal-note">📸 Vos propres photos seront intégrées lors de la livraison finale — contactez T&amp;A Digital Management</p>
   </div>
@@ -685,59 +834,123 @@ footer{background:#090909;border-top:3px solid var(--R);padding:48px 0 20px}
 <!-- ══ DEVIS BAND ══ -->
 <div class="dband">
   <div class="cnt"><div class="dband-in">
-    <div><h2>Votre devis gratuit en quelques minutes</h2><p>Appelez-nous et décrivez votre problème — on vous répond clairement, sans jargon.</p></div>
+    <div><h2>Votre devis gratuit en quelques minutes</h2><p>Appelez-nous et décrivez votre problème. On vous répond clairement, sans jargon.</p></div>
     <a href="tel:0982568642" class="btn-w">📞 09 82 56 86 42</a>
   </div></div>
 </div>
 
-<!-- ══ CHATBOT DIAGNOSTIC ══ -->
+<!-- ══ CHATBOT DIAGNOSTIC MESSENGER STYLE ══ -->
 <section id="diagnostic" class="diag-sec">
   <div class="cnt">
     <div class="diag-layout">
       <div class="diag-info rl">
         <div class="sl">Assistant diagnostic</div>
-        <h2 class="st lt">Décrivez votre<br><span>problème</span></h2>
-        <p>Notre assistant analyse les symptômes de votre véhicule et vous explique clairement ce qui peut se passer — pour que vous arriviez au garage en sachant de quoi il s'agit.</p>
-        <p>Il vous oriente et vous conseille de prendre rendez-vous si nécessaire. Simple, rapide, gratuit.</p>
+        <h2 class="st lt">Un problème avec<br><span>votre véhicule ?</span></h2>
+        <p>Notre assistant analyse les symptômes de votre véhicule et vous explique clairement ce qui peut se passer, pour que vous arriviez au garage en sachant de quoi il s'agit.</p>
+        <p>Décrivez en quelques mots ce que vous ressentez. Il vous répond instantanément.</p>
         <div class="diag-trust">
           <div class="dt">Diagnostic basé sur l'expérience de nos mécaniciens</div>
-          <div class="dt">Réponse en quelques secondes, 24h/24</div>
-          <div class="dt">Toujours orienté vers la meilleure solution pour vous</div>
-          <div class="dt">Fonctionne par mots-clés ou description libre</div>
+          <div class="dt">Répond en quelques secondes, 24h/24</div>
+          <div class="dt">Vous oriente toujours vers la meilleure solution</div>
+          <div class="dt">Fonctionne par mots-clés ou phrase libre</div>
         </div>
         <a href="#contact" class="btn-r" style="margin-top:26px;display:inline-flex">📅 Prendre rendez-vous</a>
       </div>
-      <div class="rr">
-        <div class="chat-widget" id="chatWidget">
-          <div class="chat-hd">
-            <div class="chat-avatar">🔧</div>
-            <div class="chat-hd-info">
-              <div class="chat-hd-name">Assistant Garage V&amp;R</div>
-              <div class="chat-hd-status">En ligne — répond instantanément</div>
+      <div class="rr" style="position:relative;min-height:520px;display:flex;align-items:center;justify-content:center;">
+
+        <!-- Preview bubbles décoratives (contexte Messenger) -->
+        <div class="msng-preview">
+          <div class="mp-header">
+            <div class="mp-avatar">🔧</div>
+            <div class="mp-info">
+              <div class="mp-name">Assistant Garage V&amp;R</div>
+              <div class="mp-status"><span class="mp-dot"></span>En ligne</div>
             </div>
           </div>
-          <div class="chat-msgs" id="chatMsgs">
-            <div class="msg bot"><div class="msg-b">Bonjour ! Je suis l'assistant du Garage V&amp;R. Décrivez-moi le problème de votre véhicule — bruit, voyant, panne, fuite — et je vous aide à comprendre ce qui se passe. 🚗</div><div class="msg-t">Maintenant</div></div>
+          <div class="mp-body">
+            <!-- Bulle exemple problème non identifié -->
+            <div class="mb mb-bot">
+              <div class="mb-av">🔧</div>
+              <div class="mb-wrap">
+                <div class="mb-txt">Bonjour ! Vous avez un problème avec votre véhicule mais vous ne savez pas l'identifier ?</div>
+                <div class="mb-time">Maintenant</div>
+              </div>
+            </div>
+            <div class="mb mb-usr">
+              <div class="mb-wrap">
+                <div class="mb-txt">Mon voyant moteur est allumé depuis ce matin...</div>
+                <div class="mb-time">Maintenant</div>
+              </div>
+            </div>
+            <div class="mb mb-bot">
+              <div class="mb-av">🔧</div>
+              <div class="mb-wrap">
+                <div class="mb-txt">Je comprends. Un voyant moteur peut indiquer plusieurs choses. Cliquez ci-dessous pour ouvrir le diagnostic complet 👇</div>
+                <div class="mb-time">Maintenant</div>
+              </div>
+            </div>
+            <!-- Quick chips exemple -->
+            <div class="mp-chips">
+              <span class="mp-chip">Voyant moteur</span>
+              <span class="mp-chip">Fuite d'huile</span>
+              <span class="mp-chip">Bruit freinage</span>
+            </div>
           </div>
-          <div class="chips-wrap" id="chipsWrap">
-            <div class="chip" onclick="sendChip(this)">Voyant moteur</div>
-            <div class="chip" onclick="sendChip(this)">Fuite d'huile</div>
-            <div class="chip" onclick="sendChip(this)">Bruit au freinage</div>
-            <div class="chip" onclick="sendChip(this)">Vibrations volant</div>
-            <div class="chip" onclick="sendChip(this)">AC ne refroidit plus</div>
-            <div class="chip" onclick="sendChip(this)">Pneu à plat</div>
-            <div class="chip" onclick="sendChip(this)">Voiture ne démarre pas</div>
-            <div class="chip" onclick="sendChip(this)">Révision à faire</div>
-          </div>
-          <div class="chat-input-row">
-            <input class="chat-input" id="chatIn" type="text" placeholder="Décrivez votre problème… ex: bruit moteur" maxlength="200" autocomplete="off">
-            <button class="chat-send" onclick="sendMsg()" aria-label="Envoyer">➤</button>
-          </div>
+          <button class="mp-open-btn" onclick="openDiag()">
+            <span>💬</span> Ouvrir le diagnostic
+          </button>
         </div>
+
       </div>
     </div>
   </div>
 </section>
+
+<!-- ══ CHAT MESSENGER OVERLAY ══ -->
+<div class="diag-overlay" id="diagOverlay" onclick="closeDiagBg(event)"></div>
+<div class="diag-modal" id="diagModal">
+  <div class="dm-hd">
+    <div class="dm-av">🔧</div>
+    <div class="dm-info">
+      <div class="dm-name">Assistant Garage V&amp;R</div>
+      <div class="dm-status"><span class="dm-dot"></span>En ligne</div>
+    </div>
+    <button class="dm-close" onclick="closeDiag()" aria-label="Fermer">✕</button>
+  </div>
+  <div class="dm-msgs" id="dmMsgs">
+    <div class="dms dms-bot">
+      <div class="dms-av">🔧</div>
+      <div class="dms-wrap">
+        <div class="dms-b">Bonjour ! Décrivez-moi le problème de votre véhicule. Un bruit, un voyant, une panne ? Je vous aide à comprendre ce qui se passe 🚗</div>
+        <div class="dms-t">Maintenant</div>
+      </div>
+    </div>
+  </div>
+  <div class="dm-chips" id="dmChips">
+    <div class="dmc" onclick="diagChip(this)">🔴 Voyant moteur</div>
+    <div class="dmc" onclick="diagChip(this)">💧 Fuite d'huile</div>
+    <div class="dmc" onclick="diagChip(this)">🛑 Bruit freinage</div>
+    <div class="dmc" onclick="diagChip(this)">〰️ Vibrations</div>
+    <div class="dmc" onclick="diagChip(this)">❄️ Clim en panne</div>
+    <div class="dmc" onclick="diagChip(this)">🛞 Pneu / Roue</div>
+    <div class="dmc" onclick="diagChip(this)">🔋 Ne démarre plus</div>
+    <div class="dmc" onclick="diagChip(this)">🔧 Révision à faire</div>
+  </div>
+  <div class="dm-input-row">
+    <input class="dm-input" id="dmIn" type="text" placeholder="Décrivez votre problème…" maxlength="200" autocomplete="off">
+    <button class="dm-send" onclick="diagSend()" aria-label="Envoyer">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/><path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- Bulle flottante Messenger (visible partout) -->
+<div class="msng-bubble" id="msngBubble" onclick="openDiag()">
+  <div class="msng-bubble-ico">🔧</div>
+  <div class="msng-bubble-txt">Un problème ? Je vous aide</div>
+  <button class="msng-bubble-close" onclick="closeBubble(event)" aria-label="Fermer">✕</button>
+  <div class="msng-notif">1</div>
+</div>
 
 <!-- ══ AVIS ══ -->
 <section id="avis" class="av-sec">
@@ -886,142 +1099,117 @@ function sendRdv(){
   document.querySelector('.rdv-submit').style.display='none';
 }
 
-/* ── CHATBOT DIAGNOSTIC ── */
-const diagKB=[
-  {keys:['voyant','moteur','check','lampe','témoin'],
-   title:'🔴 Voyant moteur allumé',
-   msg:'Un voyant moteur peut indiquer plusieurs choses : problème de capteur, pression d\'huile, surcharge du système d\'échappement (FAP/catalyseur), ou défaut d\'injection. Il ne faut pas rouler longtemps sans diagnostic — certains voyants sont urgents.\n\n👉 Un diagnostic électronique en 30 min suffit souvent à identifier la cause précisément.',
-   rdv:true},
-  {keys:['fuite','huile','goutte','tache','sol','liquide','noire'],
-   title:'💧 Fuite détectée',
-   msg:'Une fuite peut être d\'huile moteur (tache noire sous le véhicule), de liquide de refroidissement (verdâtre/rosé), de direction assistée (rougeâtre) ou de frein (transparente/dorée). Chacune a sa gravité.\n\nFuite d\'huile = surveillance de niveau obligatoire. Fuite de frein = URGENT, ne pas rouler.\n\n👉 On identifie la source rapidement au garage — apportez votre véhicule dès que possible.',
-   rdv:true},
-  {keys:['frein','freinage','bruit','crissement','grincement','pédale','freine','distance'],
-   title:'🛑 Problème de freinage',
-   msg:'Un bruit au freinage (crissement, grincement) indique souvent des plaquettes usées. Un freinage long ou une pédale qui s\'enfonce peut signaler un problème hydraulique (liquide, maitre-cylindre).\n\nLes freins c\'est votre sécurité — ne pas attendre !\n\n👉 Contrôle freins gratuit inclus dans notre diagnostic.',
-   rdv:true},
-  {keys:['vibration','tremble','vibre','volant','vobration','secousse'],
-   title:'〰️ Vibrations / tremblements',
-   msg:'Les vibrations au volant peuvent venir de pneus mal équilibrés ou déformés, d\'un problème de géométrie, d\'une rotule ou roulement usé, ou d\'un joint de transmission défaillant.\n\nSi ça empire à grande vitesse, c\'est souvent l\'équilibrage ou un pneu. Si ça apparaît en tournant, c\'est une transmission.\n\n👉 On diagnostique la cause exacte en quelques minutes.',
-   rdv:true},
-  {keys:['clim','climatisation','ac','chaud','refroidit','ventilation','souffle'],
-   title:'❄️ Climatisation',
-   msg:'Si la clim ne refroidit plus, c\'est souvent une perte de gaz frigorigène (fuite au niveau du circuit) ou un compresseur défaillant. Parfois juste besoin d\'une recharge.\n\nEn été, une clim en panne rend les longs trajets très inconfortables.\n\n👉 Recharge clim disponible + détection de fuites au garage.',
-   rdv:true},
-  {keys:['pneu','crevaison','plat','dégonflé','roue','jante','usure'],
-   title:'🛞 Pneu / Roue',
-   msg:'Crevaison, usure irrégulière, pneu qui se dégonfle lentement — ces problèmes peuvent venir du pneu lui-même, de la valve, ou d\'un problème de géométrie (usure anormale d\'un côté).\n\nUn pneu trop usé c\'est dangereux par temps mouillé : distance de freinage fortement augmentée.\n\n👉 Contrôle et remplacement pneus disponibles, avec conseil sur les meilleures options pour votre véhicule.',
-   rdv:true},
-  {keys:['démarre','démarrage','batterie','calé','starter','ne démarre','ne part'],
-   title:'🔋 Problème de démarrage',
-   msg:'Si le moteur ne démarre pas, les causes les plus fréquentes sont : batterie déchargée ou morte, démarreur défaillant, problème d\'alimentation (pompe à carburant, injecteurs) ou de signal de sécurité (antidémarrage).\n\nBatterie = souvent le cas par temps froid ou si la voiture n\'a pas roulé longtemps.\n\n👉 Test batterie et diagnostic démarrage disponibles au garage.',
-   rdv:true},
-  {keys:['révision','entretien','vidange','service','km','kilométrage','carnet'],
-   title:'🔧 Révision / Entretien',
-   msg:'Chaque constructeur préconise une révision selon le kilométrage ou la durée (souvent 15 000 à 30 000 km, ou 1 an). Une révision comprend : vidange huile + filtre, filtre à air, filtre habitacle, contrôle des niveaux et des organes de sécurité.\n\nNe pas faire sa révision peut annuler la garantie et accélérer l\'usure.\n\n👉 Prenez RDV en précisant votre kilométrage, on prépare tout à l\'avance.',
-   rdv:true},
-  {keys:['courroie','distribution','chaine','pompe','eau','surchauffe','température'],
-   title:'🌡️ Surchauffe / Courroie',
-   msg:'Température élevée = problème de refroidissement (thermostat, pompe à eau, durite, liquide) ou courroie cassée. C\'est URGENT — rouler en surchauffe peut détruire le moteur en quelques minutes.\n\nArrêtez-vous, coupez le moteur, ne reprenez pas la route sans diagnostic.\n\n👉 Contactez-nous immédiatement : 09 82 56 86 42',
-   rdv:true,urgent:true},
-  {keys:['boîte','vitesse','passage','passe','embrayage','gratte','pédale','embr'],
-   title:'⚙️ Boîte de vitesses / Embrayage',
-   msg:'Difficulté à passer les vitesses, grattement, pédale d\'embrayage qui patine ou pédale qui reste au fond — ce sont les signes d\'un embrayage ou d\'une boîte à surveiller.\n\nL\'embrayage s\'use progressivement — si ça patine sur autoroute ou en montée, il est temps de le faire vérifier.\n\n👉 Diagnostic embrayage / boîte disponible au garage.',
-   rdv:true},
-  {keys:['bruit','son','sifflement','claquement','cognement','tape','bruit moteur','ronfle'],
-   title:'🔊 Bruit anormal',
-   msg:'Un bruit au moteur (claquement = bielle, tap-tap = poussoirs, sifflement = courroie ou vanne), sous la voiture (silencieux, cardan), ou dans la direction (rotule, crémaillère) — chaque bruit a une signature.\n\nPlus un bruit est métallique et régulier, plus c\'est urgent à faire vérifier.\n\n👉 Amenez-nous le véhicule, on identifie l\'origine du bruit.',
-   rdv:true},
-];
+/* ── MESSENGER DIAGNOSTIC ── */
+function openDiag(){
+  document.getElementById('diagOverlay').classList.add('open');
+  document.getElementById('diagModal').classList.add('open');
+  document.getElementById('msngBubble').classList.add('hidden');
+  document.body.style.overflow='hidden';
+  setTimeout(()=>document.getElementById('dmIn').focus(),350);
+}
+function closeDiag(){
+  document.getElementById('diagOverlay').classList.remove('open');
+  document.getElementById('diagModal').classList.remove('open');
+  document.body.style.overflow='';
+}
+function closeDiagBg(e){if(e.target===document.getElementById('diagOverlay'))closeDiag()}
+function closeBubble(e){e.stopPropagation();document.getElementById('msngBubble').classList.add('hidden')}
 
-const greetings=['Bonjour !','Salut !','Hello !'];
-let msgCount=0;
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDiag()});
+
+/* KB */
+const KB=[
+  {k:['voyant','moteur','check','temoin','lampe','orange','rouge'],
+   t:'🔴 Voyant moteur allumé',
+   m:'Un voyant moteur allumé peut indiquer plusieurs choses : problème de capteur, pression d\'huile basse, FAP saturé, défaut d\'injection ou d\'allumage.\n\nCertains voyants sont urgents (huile, température), d\'autres peuvent attendre quelques jours. Un diagnostic électronique en 30 min identifie la cause précisément.\n\n👉 <a href="#contact">Prendre RDV au garage</a> dès que possible.',rdv:true},
+  {k:['fuite','huile','goutte','tache','sol','liquide','noire','verdatre','vert','rose'],
+   t:'💧 Fuite détectée',
+   m:'Une tache sous la voiture peut être de l\'huile moteur (noire), du liquide de refroidissement (verdâtre ou rosé), du liquide de frein (transparent/doré) ou de la direction assistée (rougeâtre).\n\nFuite de frein = URGENT, ne pas rouler. Fuite d\'huile = surveiller le niveau quotidiennement.\n\n👉 <a href="#contact">Venez au garage rapidement</a>, on identifie la source en quelques minutes.',rdv:true,urgent:false},
+  {k:['frein','freinage','crissement','grincement','pedale','freine','distance','longue'],
+   t:'🛑 Problème de freinage',
+   m:'Un crissement ou grincement au freinage indique souvent des plaquettes usées à remplacer. Une pédale longue ou molle peut signaler un problème hydraulique (liquide, maître-cylindre, étrier).\n\nLes freins c\'est votre sécurité, ne pas attendre.\n\n👉 <a href="#contact">Contrôle freins disponible</a> au garage, devis gratuit.',rdv:true},
+  {k:['vibration','tremble','vibre','volant','secousse','vobration'],
+   t:'〰️ Vibrations / tremblements',
+   m:'Les vibrations au volant viennent souvent de pneus mal équilibrés, d\'un problème de géométrie, d\'une rotule ou d\'un roulement usé. Si ça empire à grande vitesse, c\'est généralement l\'équilibrage ou un pneu déformé.\n\n👉 <a href="#contact">Contrôle équilibrage et géométrie</a> disponible au garage.',rdv:true},
+  {k:['clim','climatisation','ac','chaud','refroidit','ventilation','souffle'],
+   t:'❄️ Climatisation défaillante',
+   m:'Si votre clim ne refroidit plus, c\'est souvent une perte de gaz frigorigène (fuite dans le circuit) ou un compresseur défaillant. Parfois une simple recharge suffit.\n\n👉 <a href="#contact">Recharge et contrôle de fuite disponibles</a> au garage.',rdv:true},
+  {k:['pneu','crevaison','plat','degonfle','roue','jante','usure'],
+   t:'🛞 Pneu / Roue',
+   m:'Crevaison, usure irrégulière, pneu qui se dégonfle lentement... Cela peut venir du pneu, de la valve, ou d\'un problème de géométrie causant une usure anormale d\'un côté.\n\nUn pneu trop usé augmente fortement la distance de freinage par temps mouillé.\n\n👉 <a href="#contact">Contrôle et remplacement pneus</a> au garage, conseil inclus.',rdv:true},
+  {k:['demarre','demarrage','batterie','cale','starter','demarre pas','part pas'],
+   t:'🔋 Problème de démarrage',
+   m:'Les causes les plus fréquentes : batterie déchargée ou morte, démarreur défaillant, problème d\'alimentation (pompe à carburant) ou signal antidémarrage.\n\nBatterie froide : souvent le cas par temps froid ou si la voiture n\'a pas roulé depuis longtemps.\n\n👉 <a href="#contact">Test batterie et diagnostic démarrage</a> disponibles.',rdv:true},
+  {k:['revision','entretien','vidange','service','km','kilometrage','carnet'],
+   t:'🔧 Révision / Entretien',
+   m:'Une révision comprend vidange huile + filtre, filtre à air, filtre habitacle, et contrôle complet des organes de sécurité. Les constructeurs recommandent généralement tous les 15 000 à 30 000 km.\n\nNe pas faire sa révision peut accélérer l\'usure du moteur et invalider la garantie.\n\n👉 <a href="#contact">Prenez RDV</a> en précisant votre kilométrage, on prépare tout.',rdv:true},
+  {k:['courroie','distribution','chaine','surchauffe','temperature','chauffe','fumee'],
+   t:'🌡️ Surchauffe / Distribution',
+   m:'Température moteur élevée = problème de refroidissement (thermostat, pompe à eau, durite) ou courroie cassée. C\'est URGENT.\n\nArrêtez le moteur immédiatement, ne reprenez pas la route. Rouler en surchauffe peut détruire le moteur en quelques minutes.\n\n👉 Appelez-nous immédiatement : <a href="tel:0982568642">09 82 56 86 42</a>',rdv:true,urgent:true},
+  {k:['bruit','son','sifflement','claquement','cognement','tape','ronfle','grince'],
+   t:'🔊 Bruit anormal',
+   m:'Chaque bruit a une signature : claquement métallique = bielle ou poussoirs, sifflement = courroie ou vanne, grondement = roulement, bruit de ferraille sous la voiture = échappement ou cardan.\n\nPlus un bruit est métallique et régulier, plus c\'est urgent.\n\n👉 <a href="#contact">Amenez le véhicule</a>, on identifie l\'origine du bruit.',rdv:true},
+  {k:['embrayage','boite','vitesse','passage','gratte','patine'],
+   t:'⚙️ Embrayage / Boîte de vitesses',
+   m:'Difficulté à passer les vitesses, grattement, patinage à l\'accélération ou pédale qui reste au fond : ce sont les signes d\'un embrayage ou d\'une boîte à surveiller.\n\nL\'embrayage s\'use progressivement. Si ça patine en montée ou à vitesse stabilisée, il est temps de le faire vérifier.\n\n👉 <a href="#contact">Diagnostic embrayage disponible</a> au garage.',rdv:true},
+];
 
 function getTime(){return new Date().toLocaleTimeString('fr',{hour:'2-digit',minute:'2-digit'})}
 
-function addMsg(txt,isBot,isHTML=false){
-  const msgs=document.getElementById('chatMsgs');
+function addDmMsg(txt,isUsr,isHTML=false){
+  const c=document.getElementById('dmMsgs');
   const d=document.createElement('div');
-  d.className='msg '+(isBot?'bot':'usr');
-  const b=document.createElement('div');
-  b.className='msg-b';
-  if(isHTML)b.innerHTML=txt;
-  else b.textContent=txt;
-  const t=document.createElement('div');
-  t.className='msg-t';
-  t.textContent=getTime();
-  d.appendChild(b);d.appendChild(t);
-  msgs.appendChild(d);
-  msgs.scrollTop=msgs.scrollHeight;
-  msgCount++;
+  d.className='dms '+(isUsr?'dms-usr':'dms-bot');
+  if(!isUsr){const av=document.createElement('div');av.className='dms-av';av.textContent='🔧';d.appendChild(av)}
+  const w=document.createElement('div');w.className='dms-wrap';
+  const b=document.createElement('div');b.className='dms-b';
+  if(isHTML)b.innerHTML=txt;else b.textContent=txt;
+  const t=document.createElement('div');t.className='dms-t';t.textContent=getTime();
+  w.appendChild(b);w.appendChild(t);d.appendChild(w);c.appendChild(d);
+  c.scrollTop=c.scrollHeight;
 }
 
-function addTyping(){
-  const msgs=document.getElementById('chatMsgs');
-  const d=document.createElement('div');
-  d.className='typing';d.id='typing';
-  d.innerHTML='<div class="typing-dots"><span></span><span></span><span></span></div>&nbsp;Le garage analyse…';
-  msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;
-  return d;
+function addTypingDm(){
+  const c=document.getElementById('dmMsgs');
+  const d=document.createElement('div');d.className='dm-typing-row';d.id='dmTyping';
+  d.innerHTML='<div class="dm-typing-av">🔧</div><div class="dm-typing-b"><span></span><span></span><span></span></div>';
+  c.appendChild(d);c.scrollTop=c.scrollHeight;return d;
 }
 
-function analyzeText(txt){
-  const low=txt.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-  for(const entry of diagKB){
-    if(entry.keys.some(k=>low.includes(k.normalize('NFD').replace(/[\u0300-\u036f]/g,'')))){
-      return entry;
-    }
-  }
+function analyze(txt){
+  const l=txt.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  for(const e of KB){if(e.k.some(k=>l.includes(k.normalize('NFD').replace(/[\u0300-\u036f]/g,''))))return e}
   return null;
 }
 
-function buildResponse(entry){
-  let html='<strong>'+entry.title+'</strong><br><br>';
-  html+=entry.msg.replace(/\n/g,'<br>');
-  if(entry.urgent){
-    html+='<br><br><span style="color:#e74c3c;font-weight:700">⚠️ URGENT — N\'attendez pas !</span>';
-  }
-  if(entry.rdv){
-    html+='<br><br><a href="#contact" style="display:inline-block;background:var(--R);color:#fff;padding:8px 16px;font-family:Rajdhani,sans-serif;font-weight:700;font-size:.85rem;letter-spacing:1px;text-transform:uppercase;margin-top:4px">📅 Prendre RDV au garage →</a>';
-  }
-  return html;
+function buildReply(e){
+  let h='<strong>'+e.t+'</strong><br><br>'+e.m.replace(/\n/g,'<br>');
+  if(e.urgent)h+='<br><br><strong style="color:#e74c3c">⚠️ Situation urgente, n\'attendez pas !</strong>';
+  h+='<br><br><a href="#contact" onclick="closeDiag()" style="display:inline-block;background:#C0392B;color:#fff;padding:8px 18px;border-radius:20px;font-family:Rajdhani,sans-serif;font-weight:700;font-size:.85rem;letter-spacing:1px;text-transform:uppercase;margin-top:4px">📅 Prendre RDV au garage →</a>';
+  return h;
 }
 
-function processMsg(txt){
+function processText(txt){
   if(!txt.trim())return;
-  addMsg(txt,false);
-  const input=document.getElementById('chatIn');
-  input.value='';
-  // Hide chips after first interaction
-  document.getElementById('chipsWrap').style.display='none';
-  const ty=addTyping();
+  addDmMsg(txt,true);
+  document.getElementById('dmIn').value='';
+  document.getElementById('dmChips').style.display='none';
+  const ty=addTypingDm();
   setTimeout(()=>{
     ty.remove();
-    const entry=analyzeText(txt);
-    if(entry){
-      addMsg(buildResponse(entry),true,true);
-      setTimeout(()=>{
-        addMsg('Avez-vous d\'autres questions ? Vous pouvez aussi appeler directement le garage au <a href="tel:0982568642" style="color:var(--R);font-weight:700">09 82 56 86 42</a> ou <a href="#contact" style="color:var(--R);font-weight:700">prendre un RDV en ligne</a>.',true,true);
-      },800);
+    const e=analyze(txt);
+    if(e){
+      addDmMsg(buildReply(e),false,true);
+      setTimeout(()=>{addDmMsg('Des questions supplémentaires ? Vous pouvez aussi appeler directement le <strong>09 82 56 86 42</strong> ou <a href="#contact" onclick="closeDiag()">prendre RDV en ligne</a>.',false,true)},900);
     } else {
-      addMsg('Je n\'ai pas bien identifié le problème avec ces mots. Essayez de décrire plus précisément : quel bruit ? quel voyant ? quelle pièce ? Ou appelez directement le garage au <a href="tel:0982568642" style="color:var(--R);font-weight:700">09 82 56 86 42</a> — nos mécaniciens vous répondront de vive voix.',true,true);
+      addDmMsg('Je n\'ai pas bien identifié votre problème. Essayez de préciser : quel bruit ? quel voyant allumé ? quelle pièce concernée ? Ou appelez-nous directement au <a href="tel:0982568642">09 82 56 86 42</a> — nos mécaniciens vous répondent.',false,true);
     }
-  },900+Math.random()*400);
+  },800+Math.random()*400);
 }
 
-function sendMsg(){
-  const v=document.getElementById('chatIn').value;
-  processMsg(v);
-}
-
-function sendChip(el){
-  processMsg(el.textContent);
-}
-
-document.getElementById('chatIn').addEventListener('keydown',e=>{
-  if(e.key==='Enter')sendMsg();
-});
-
+function diagSend(){processText(document.getElementById('dmIn').value)}
+function diagChip(el){processText(el.textContent)}
+document.getElementById('dmIn').addEventListener('keydown',e=>{if(e.key==='Enter')diagSend()});
 /* ── MOTEUR CANVAS ── */
 (function(){
   const cv=document.getElementById('ec');
